@@ -1,7 +1,6 @@
 import pygame as pg
 import random
 from time import sleep
-from data import data_values
 
 pg.init()
 
