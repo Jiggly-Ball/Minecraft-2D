@@ -71,11 +71,11 @@ class Game:
 		font = pg.font.Font('freesansbold.ttf', 32)
 		text = font.render(f"Loading Blocks...", True, (0, 255, 0))
 		
-		self.window.blit(text, (window.get_width()//2, window.get_height()//2))
+		self.window.blit(text, (window.get_width()//8, window.get_height()//2))
 		self.refresh()
 
-		self.generate_world()
-		self.display_update()
+		self.render_world()
+		self.display_update(False)
 		sleep(2)
 		self.refresh()
 
@@ -101,7 +101,7 @@ class Game:
 			clock.tick(fps)
 
 
-	def map_update(self, direction:str):
+	def map_update(self, direction:str):		# Moves the map in the opposite direction of the player 
 
 		self.data[f"x{player.pos['x']}y{player.pos['y']}"] = "empty"
 
@@ -121,16 +121,15 @@ class Game:
 			player.pos["x"] -= self.size
 			self.offset_x += self.size
 
-		self.generate_world()
+		self.render_world()
 		self.display_update()
-		self.refresh()
 
 
-	def refresh(self):
+	def refresh(self):							# Refreshes the display
 		pg.display.flip()
 
 	
-	def generate_world(self):
+	def render_world(self):						# Stores the blocks to be rendered in a list
 
 		for y in range(player.pos["y"]+self.render*self.size, player.pos["y"]-(self.render+1)*self.size, -self.size):
 			for x in range(player.pos["x"]-self.render*self.size, player.pos["x"]+(self.render*self.size), self.size):
@@ -138,7 +137,9 @@ class Game:
 				self.display.append(point)
 
 
-	def display_update(self):
+	def display_update(self, auto_render=True):	# Automatically assigns a random block to a coordinate
+												# if it doesn't exist & renders the whole map
+												# including the player.
 
 		for block in self.display:
 			x, y = self.read_axises(block)
@@ -146,7 +147,7 @@ class Game:
 			try:
 				block_img = self.blocks[self.data[block]]
 			except KeyError:
-				new_block = self.block_gen()
+				new_block = random.choice(self.block_list)
 				self.data[block] = new_block
 				block_img = self.blocks[new_block]
 				
@@ -154,13 +155,14 @@ class Game:
 			self.window.blit(player.img, (player.pos["x"] + self.offset_x, player.pos["y"] + self.offset_y))
 			
 			self.display = []
+		
+		if auto_render is True:
+			self.refresh()
 
 
-	def block_gen(self) -> str:
-		return random.choice(self.block_list)
-
-
-	def read_axises(self, coords:str) -> tuple:
+	def read_axises(self, coords:str):			# Converts a string of coordinate (xNyN where N is the
+												# coordinate of it's respective axis) to a tuple where
+												# the fist index is of X axis and second of Y axis
 		xval = yval = ""
 		ycount = False
 		
