@@ -6,7 +6,7 @@ pg.init()
 
 imported = pg.get_init()
 if imported is False:
-	raise Exception("Failed Importing PyGame")
+	raise Exception("Failed Importing PyGame. Please reinstall pygame.")
 
 block_size = 100
 pg.display.set_caption("2D Minecraft")
@@ -45,16 +45,16 @@ class empty:
 
 
 class Game:
-	def __init__(self, size:int, window_:pg.Surface) -> None:
+	def __init__(self, size:int, window:pg.Surface) -> None:
 
 		fps = 60
 		clock = pg.time.Clock()
 		running = True
 
-		self.window = window_
+		self.window = window
 
 		self.data = {}
-		self.render = 50
+		self.render = 30	# Renders only these many blocks around the player
 		self.blocks = {
 			"stone"      : stone.img      ,
 			"cobblestone": cobblestone.img,
@@ -66,18 +66,17 @@ class Game:
 		self.block_list = ["stone"] * stone.rate + ["diamondore"] * diamondore.rate + ["goldore"] * goldore.rate + ["cobblestone"] * cobblestone.rate
 
 		self.offset_x = self.offset_y = 0
-		self.game_start = False
 		self.size = size
 
 		font = pg.font.Font('freesansbold.ttf', 32)
 		text = font.render(f"Loading Blocks...", True, (0, 255, 0))
 		
-		self.window.blit(text, (window_.get_width()//9, window_.get_height()//2))
+		self.window.blit(text, (window.get_width()//2, window.get_height()//2))
 		self.refresh()
 
 		self.generate_world()
 		self.display_update()
-		sleep(3)
+		sleep(2)
 		self.refresh()
 
 		while running:
