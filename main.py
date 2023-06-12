@@ -1,5 +1,6 @@
 import pygame as pg
 import random
+from pygame.display import flip as refresh
 from time import sleep
 
 pg.init()
@@ -38,12 +39,12 @@ class Game:
 		text = font.render(f"Loading Blocks...", True, (0, 255, 0))
 		
 		self.window.blit(text, (window.get_width()//8, window.get_height()//2))
-		self.refresh()
+		refresh()
 
 		self.render_world()
 		self.display_update(False)
 		sleep(2)
-		self.refresh()
+		refresh()
 
 		while running:
 			for event in pg.event.get():
@@ -90,10 +91,6 @@ class Game:
 		self.render_world()
 		self.display_update()
 
-
-	def refresh(self):							# Refreshes the display
-		pg.display.flip()
-
 	
 	def render_world(self):						# Stores the blocks to be rendered in a list
 
@@ -123,7 +120,7 @@ class Game:
 			self.display = []
 		
 		if auto_render is True:
-			self.refresh()
+			refresh()
 
 
 	def read_axises(self, coords:str):			# Converts a string of coordinate (xNyN where N is the
