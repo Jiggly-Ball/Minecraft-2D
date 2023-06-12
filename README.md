@@ -13,4 +13,4 @@ Requires `pygame` to be installed. You can execute the code below in your termin
 ```
 py pip install pygame
 ```
-https://github.com/Krishpy-Chips/Discord-2.0/assets/101330162/68e0fca9-573b-415d-800d-90e7fa22cb40
+![ezgif com-video-to-gif](https://github.com/Krishpy-Chips/Discord-2.0/assets/101330162/b2160144-53b8-464c-a850-3684f4ca75cd)
