@@ -3,51 +3,17 @@ import random
 from time import sleep
 
 pg.init()
-
-imported = pg.get_init()
-if imported is False:
-	raise Exception("Failed Importing PyGame. Please reinstall pygame.")
-
-block_size = 100
 pg.display.set_caption("2D Minecraft")
+
 scrnx, scrny = 1200, 700
 window = pg.display.set_mode((scrnx, scrny))
 
-
-def load_image(name:str):
-	image_load = pg.image.load(f"assets\{name}").convert()
-	final_image = pg.transform.scale(image_load, (block_size, block_size))
-	return final_image
-
-
-class player:
-	pos = {"x":block_size*5, "y":block_size*3}
-	img = load_image("player.png")
-
-class stone:
-	rate = 90
-	img = load_image("stone.png")
-
-class diamondore:
-	rate = 4
-	img = load_image("diamond.png")
-
-class goldore:
-	rate = 5
-	img = load_image("gold.png")
-	
-class cobblestone:
-	rate = 40
-	img = load_image("cobblestone.png")
-
-class empty:
-	img = load_image("empty.png")
-
+from data import Data
+from asset_holder import *
 
 class Game:
 	def __init__(self, size:int, window:pg.Surface) -> None:
 
-		fps = 60
 		clock = pg.time.Clock()
 		running = True
 
@@ -98,7 +64,7 @@ class Game:
 				if event.type == pg.QUIT:
 					running = False
 
-			clock.tick(fps)
+			clock.tick(Data.fps)
 
 
 	def map_update(self, direction:str):		# Moves the map in the opposite direction of the player 
@@ -182,4 +148,4 @@ class Game:
 		yval = int(yval.strip())
 		return (xval, yval)
 
-Game(block_size, window)
+Game(Data.block_size, window)
