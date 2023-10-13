@@ -11,6 +11,6 @@ Inspired by Minecraft and Terraria I decided to make a game combining both of th
 ### Dependancies-
 Requires `pygame` to be installed. You can execute the code below in your terminal to install pygame.
 ```
-py pip install pygame
+pip install pygame
 ```
 ![ezgif com-video-to-gif (1)](https://github.com/Krishpy-Chips/Discord-2.0/assets/101330162/d48c21e2-7e09-4842-8792-bea1da680d36)
