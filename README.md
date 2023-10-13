@@ -8,7 +8,7 @@ Inspired by Minecraft and Terraria I decided to make a game combining both of th
 4. Boring
 5. And many other features!
 
-### Dependancies-
+## Dependancies-
 Requires `pygame` to be installed. You can execute the code below in your terminal to install pygame.
 ```
 pip install pygame
