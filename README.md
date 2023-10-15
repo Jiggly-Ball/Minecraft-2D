@@ -6,7 +6,7 @@ Inspired by Minecraft and Terraria I decided to make a game combining both of th
 2. Memory efficient with constant 60 FPS (As it only renders the required blocks onto the screen)
 3. No objective in game
 4. Boring
-5. And many other features!
+5. And many other features! (Lie)
 
 ## Dependancies-
 Requires `pygame` to be installed. You can execute the code below in your terminal to install pygame.
